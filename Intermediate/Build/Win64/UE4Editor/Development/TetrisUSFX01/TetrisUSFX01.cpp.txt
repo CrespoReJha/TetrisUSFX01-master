@@ -1,2 +1,2 @@
-C:\src_UE_ejemplos\TetrisUSFX01\Intermediate\Build\Win64\UE4Editor\Development\TetrisUSFX01\Definitions.TetrisUSFX01.h
-C:\src_UE_ejemplos\TetrisUSFX01\Source\TetrisUSFX01\TetrisUSFX01.h
+C:\Users\HP VICTUS\Desktop\UNIVERSIDAD\TERCER SEMESTRE\SIS457\AVANCE TETRIS\TetrisUSFX01-master\Intermediate\Build\Win64\UE4Editor\Development\TetrisUSFX01\Definitions.TetrisUSFX01.h
+C:\Users\HP VICTUS\Desktop\UNIVERSIDAD\TERCER SEMESTRE\SIS457\AVANCE TETRIS\TetrisUSFX01-master\Source\TetrisUSFX01\TetrisUSFX01.h

@@ -53,6 +53,9 @@ void ABoard::Tick(float DeltaTime)
             MoveDown();
         }
         break;
+    case PAUSADO:
+        
+        break;
     case PS_GOT_BOTTOM:
         CoolLeft -= DeltaTime;
         if (CoolLeft <= 0.0f)
@@ -84,6 +87,7 @@ void ABoard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
     PlayerInputComponent->BindAction("MoveDownToEnd", IE_Pressed, this, &ABoard::MoveDownToEnd);
     PlayerInputComponent->BindAction("NewPiece", IE_Pressed, this, &ABoard::NewPiece);
     //PlayerInputComponent->BindAction("CheckLine", IE_Pressed, this, &ABoard::CheckLine);
+    PlayerInputComponent->BindAction("PausarJuego", IE_Pressed, this, &ABoard::PausarJuego);
 
 }
 
@@ -255,3 +259,19 @@ bool ABoard::CheckGameOver()
 
     return CurrentPiece->CheckWillCollision([](FVector OldVector) { return OldVector; });
 }
+
+void ABoard::PausarJuego() {
+    //UGameplayStatics::SetGamePaused(GetWorld(), true);
+    //UGameplayStatics::SetGlobalTimeDilation(GetWorld(), 0);
+    if (Status == PS_MOVING)
+    {
+		Status = PAUSADO;
+        GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Juego Pausado"));
+	}
+    else if (Status == PAUSADO)
+    {
+		Status = PS_MOVING;
+        GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Juego Reanudado"));
+	}
+}
+

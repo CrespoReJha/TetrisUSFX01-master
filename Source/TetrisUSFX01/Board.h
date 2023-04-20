@@ -38,8 +38,10 @@ public:
 	void CheckLine();
 	void MoveDownToEnd();
 
+	void PausarJuego();
+
 private:
-	enum PieceStatus { PS_NOT_INITED, PS_MOVING, PS_GOT_BOTTOM };
+	enum PieceStatus { PS_NOT_INITED, PS_MOVING, PS_GOT_BOTTOM, PAUSADO };
 	PieceStatus Status = PS_NOT_INITED;
 
 	const float CoolDown = 0.5f;
@@ -48,4 +50,5 @@ private:
 
 	bool CheckGameOver();
 
+	
 };
