@@ -38,9 +38,6 @@ public:
 	void CheckLine();
 	void MoveDownToEnd();
 
-	void PausarJuego();
-	//void ReanudarJuego();
-
 private:
 	enum PieceStatus { PS_NOT_INITED, PS_MOVING, PS_GOT_BOTTOM };
 	PieceStatus Status = PS_NOT_INITED;
@@ -51,5 +48,4 @@ private:
 
 	bool CheckGameOver();
 
-	//bool juegoPausado = false;
 };

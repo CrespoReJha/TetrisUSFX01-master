@@ -9,16 +9,16 @@
 
 ABoard::ABoard()
 {
-    // Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-    PrimaryActorTick.bCanEverTick = true;
+ 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
 
 }
 
 // Called when the game starts or when spawned
 void ABoard::BeginPlay()
 {
-    Super::BeginPlay();
-
+	Super::BeginPlay();
+	
     for (TActorIterator<APiece> it(GetWorld()); it; ++it)
     {
         if (it->GetFName() == TEXT("DissmissPieces"))
@@ -32,20 +32,13 @@ void ABoard::BeginPlay()
 // Called every frame
 void ABoard::Tick(float DeltaTime)
 {
-    Super::Tick(DeltaTime);
+	Super::Tick(DeltaTime);
 
     if (bGameOver)
     {
         return;
     }
-    /*if (juegoPausado) {
-        UGameplayStatics::SetGamePaused(GetWorld(), true);
-        GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Juego Pausado"));
-    }
-    else if(!juegoPausado){
-        UGameplayStatics::SetGamePaused(GetWorld(), false);
-        GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Juego Continua"));
-    }*/
+
     switch (Status)
     {
     case PS_NOT_INITED:
@@ -83,7 +76,7 @@ void ABoard::Tick(float DeltaTime)
 // Called to bind functionality to input
 void ABoard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-    Super::SetupPlayerInputComponent(PlayerInputComponent);
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
     PlayerInputComponent->BindAction("Rotate", IE_Pressed, this, &ABoard::Rotate);
     PlayerInputComponent->BindAction("MoveLeft", IE_Pressed, this, &ABoard::MoveLeft);
@@ -91,8 +84,6 @@ void ABoard::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
     PlayerInputComponent->BindAction("MoveDownToEnd", IE_Pressed, this, &ABoard::MoveDownToEnd);
     PlayerInputComponent->BindAction("NewPiece", IE_Pressed, this, &ABoard::NewPiece);
     //PlayerInputComponent->BindAction("CheckLine", IE_Pressed, this, &ABoard::CheckLine);
-    PlayerInputComponent->BindAction("PausarJuego", IE_Pressed, this, &ABoard::PausarJuego);
-    //PlayerInputComponent->BindAction("ReanudarJuego", IE_Pressed, this, &ABoard::ReanudarJuego);
 
 }
 
@@ -264,50 +255,3 @@ bool ABoard::CheckGameOver()
 
     return CurrentPiece->CheckWillCollision([](FVector OldVector) { return OldVector; });
 }
-
-void ABoard::PausarJuego() {
-
-    //juegoPausado=!juegoPausado;
-    if (!UGameplayStatics::IsGamePaused(GetWorld()))
-    {
-        // Pausa el juego si no está pausado
-        UGameplayStatics::SetGamePaused(GetWorld(), true);
-        GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Juego Pausado"));
-        //UGameplayStatics::SetGamePaused(GetWorld(), false);
-        //GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Juego Continua"));
-    }
-    else
-    {
-        // Reanuda el juego si está pausado
-        UGameplayStatics::SetGamePaused(GetWorld(), false);
-        GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Juego Continua"));
-    }
-    //GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Juego Pausado"));
-    //UGameplayStatics::SetGamePaused(GetWorld(), true);
-
-    //juegoPausado = !juegoPausado;
-
-    /*if (juegoPausado) {
-        GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Juego Pausado"));
-        UGameplayStatics::SetGamePaused(GetWorld(), true);
-    }
-    else
-    {
-        GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Juego Continua"));
-        UGameplayStatics::SetGamePaused(GetWorld(), false);
-    }
-    /*if (juegoPausado)
-    {
-        GetWorldTimerManager().SetTimer(TimerHandle, this, &ABoard::MoveDown, CoolDown, true);
-    }
-    else
-    {
-        GetWorldTimerManager().ClearTimer(TimerHandle);
-    }*/
-}
-
-/*void ABoard::ReanudarJuego() {
-
-    UGameplayStatics::SetGamePaused(GetWorld(), false);
-    GEngine->AddOnScreenDebugMessage(-1, 10, FColor::Red, TEXT("Juego Continua"));
-}*/    
